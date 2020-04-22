@@ -48,7 +48,7 @@ n, bins, patches = plt.hist(x=stage2, bins='auto', color='#0504aa',
 plt.grid(axis='y', alpha=0.75)
 plt.xlabel('Time (mins)')
 plt.ylabel('Frequency')
-plt.title('Labeling for Stage2')
+plt.title('Labeling for Stage2 - Time per image')
 maxfreq = n.max()
 
 # Set a clean upper y-axis limit.
@@ -61,7 +61,7 @@ n, bins, patches = plt.hist(x=stage3, bins='auto', color='#0504aa',
 plt.grid(axis='y', alpha=0.75)
 plt.xlabel('Time (mins)')
 plt.ylabel('Frequency')
-plt.title('Labeling for Stage3')
+plt.title('Labeling for Stage3 - Time per image')
 maxfreq = n.max()
 
 # Set a clean upper y-axis limit.
@@ -74,7 +74,7 @@ n, bins, patches = plt.hist(x=stage2b, bins='auto', color='#0504aa',
 plt.grid(axis='y', alpha=0.75)
 plt.xlabel('Time (mins)')
 plt.ylabel('Frequency')
-plt.title('Labeling for Stage2')
+plt.title('Labeling for Stage2 - Time per image - Reproduced results')
 maxfreq = n.max()
 
 # Set a clean upper y-axis limit.
@@ -88,7 +88,7 @@ n, bins, patches = plt.hist(x=stage3b, bins='auto', color='#0504aa',
 plt.grid(axis='y', alpha=0.75)
 plt.xlabel('Time (mins)')
 plt.ylabel('Frequency')
-plt.title('Labeling for Stage3')
+plt.title('Labeling for Stage3 - Time per image - Reproduced results')
 maxfreq = n.max()
 
 # Set a clean upper y-axis limit.
@@ -116,7 +116,7 @@ n, bins, patches = plt.hist(x=stage2_labels, bins='auto', color='#0504aa',
 plt.grid(axis='y', alpha=0.75)
 plt.xlabel('Time (mins)')
 plt.ylabel('Frequency')
-plt.title('Labeling for Stage2')
+plt.title('Labeling for Stage2 - Time per label')
 maxfreq = n.max()
 
 # Set a clean upper y-axis limit.
@@ -130,7 +130,7 @@ n, bins, patches = plt.hist(x=stage3_labels, bins='auto', color='#0504aa',
 plt.grid(axis='y', alpha=0.75)
 plt.xlabel('Time (mins)')
 plt.ylabel('Frequency')
-plt.title('Labeling for Stage3')
+plt.title('Labeling for Stage3 - Time per label')
 maxfreq = n.max()
 
 # Set a clean upper y-axis limit.
