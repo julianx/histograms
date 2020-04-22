@@ -6,7 +6,7 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(True, True)
 
     def test_another_success(self):
-        self.assertFalse(True, False)
+        self.assertFalse(False)
 
 
 if __name__ == '__main__':
