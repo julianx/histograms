@@ -1,32 +1,33 @@
 from collections import Counter
 import matplotlib.pyplot as plt
 import numpy as np
+import utils
 
-
+#
+# # %%
+# def ascii_histogram(seq) -> None:
+#     """A horizontal frequency-table/histogram plot."""
+#     counted = Counter(seq)
+#     for k in sorted(counted):
+#         print('{0:5f} {1}'.format(k, '+' * counted[k]))
+#
+#
 # %%
-def ascii_histogram(seq) -> None:
-    """A horizontal frequency-table/histogram plot."""
-    counted = Counter(seq)
-    for k in sorted(counted):
-        print('{0:5f} {1}'.format(k, '+' * counted[k]))
-
-
-# %%
-stage2 = (
-    1.7, 7.9, 7.3, 16.5, 6.0, 3.8, 4.5, 3.3, 3.7, 12.4, 0.7, 1.0, 0.7, 0.8, 0.6, 3.4, 0.8, 4.7, 2.6, 13.8, 3.3, 1.3,
-    4.3, 1.9, 5.9, 12.3, 2.3, 1.7, 1.8, 1.9, 1.7, 3.4, 2.0, 4.9, 0.7, 0.8, 4.5, 1.1, 1.1, 9.9, 2.1, 1.1, 4.2, 2.3,
-    0.7, 3.7, 1.8, 1.0)
+# stage2 = (
+#     1.7, 7.9, 7.3, 16.5, 6.0, 3.8, 4.5, 3.3, 3.7, 12.4, 0.7, 1.0, 0.7, 0.8, 0.6, 3.4, 0.8, 4.7, 2.6, 13.8, 3.3, 1.3,
+#     4.3, 1.9, 5.9, 12.3, 2.3, 1.7, 1.8, 1.9, 1.7, 3.4, 2.0, 4.9, 0.7, 0.8, 4.5, 1.1, 1.1, 9.9, 2.1, 1.1, 4.2, 2.3,
+#     0.7, 3.7, 1.8, 1.0)
 
 stage2b = (
     1.68, 7.90, 7.25, 16.53, 5.98, 3.83, 4.45, 3.28, 3.70, 12.37, 0.67, 1.05, 0.63, 0.75, 0.62, 3.43, 0.78, 4.72, 2.63,
     13.78, 3.33, 1.27, 4.27, 1.83, 5.87, 12.30, 2.27, 1.70, 1.80, 1.88, 1.67, 3.38, 2.02, 4.90, 0.73, 0.75, 4.52, 1.13,
     1.08, 9.93, 2.12, 1.10, 4.18, 2.35, 0.72, 3.73, 1.80, 0.95
 )
-stage3 = (
-    0.5, 1.6, 0.7, 1.2, 0.5, 0.7, 0.4, 0.5, 0.5, 0.5, 0.7, 0.4, 0.7, 0.4, 0.6, 0.4, 0.3, 0.3, 0.4, 0.7, 0.2, 0.4, 0.4,
-    0.5, 1.0, 0.6, 0.9, 0.4, 0.4, 0.5, 0.6, 0.7, 0.7, 0.8, 0.3, 0.3, 0.3, 0.5, 0.4, 0.4, 0.5, 1.0, 0.6, 0.3, 0.3, 0.6,
-    0.7, 0.6, 0.5, 0.5, 0.8, 0.5, 0.6, 0.6, 0.3, 0.8, 0.5, 0.5, 0.6, 0.2, 0.5, 0.4, 0.3, 0.4, 0.4, 0.6, 1.0, 0.9, 0.3,
-    0.6, 0.3, 0.5, 1.0, 0.5, 0.3, 0.4, 0.8, 0.5, 0.5, 0.4, 0.3, 0.4, 0.6, 0.4, 0.5, 0.4, 0.3, 0.2)
+# stage3 = (
+#     0.5, 1.6, 0.7, 1.2, 0.5, 0.7, 0.4, 0.5, 0.5, 0.5, 0.7, 0.4, 0.7, 0.4, 0.6, 0.4, 0.3, 0.3, 0.4, 0.7, 0.2, 0.4, 0.4,
+#     0.5, 1.0, 0.6, 0.9, 0.4, 0.4, 0.5, 0.6, 0.7, 0.7, 0.8, 0.3, 0.3, 0.3, 0.5, 0.4, 0.4, 0.5, 1.0, 0.6, 0.3, 0.3, 0.6,
+#     0.7, 0.6, 0.5, 0.5, 0.8, 0.5, 0.6, 0.6, 0.3, 0.8, 0.5, 0.5, 0.6, 0.2, 0.5, 0.4, 0.3, 0.4, 0.4, 0.6, 1.0, 0.9, 0.3,
+#     0.6, 0.3, 0.5, 1.0, 0.5, 0.3, 0.4, 0.8, 0.5, 0.5, 0.4, 0.3, 0.4, 0.6, 0.4, 0.5, 0.4, 0.3, 0.2)
 
 stage3b = (
     0.52, 1.60, 0.68, 1.15, 0.48, 0.67, 0.42, 0.47, 0.47, 0.48, 0.65, 0.40, 0.68, 0.43, 0.58, 0.37, 0.27, 0.27,
@@ -36,64 +37,30 @@ stage3b = (
     0.35, 0.80, 0.47, 0.45, 0.40, 0.28, 0.43, 0.63, 0.43, 0.52, 0.43, 0.28, 0.25
 )
 
-# Add average and deviation
+stage4b = (
+    6.05, 3.58, 17.80, 1.55, 1.63, 31.47, 1.83, 1.38, 2.13, 4.52, 4.28, 1.23, 14.37, 2.20, 8.62, 2.33, 0.95, 2.18, 5.82,
+    1.88, 1.27, 8.82, 52.18, 6.05, 6.12, 4.40, 0.98, 0.88, 0.65, 0.57, 0.72, 2.98, 0.98, 3.20, 1.30, 2.92, 1.45, 3.33,
+    2.40, 6.33, 1.60, 3.10, 8.03, 4.68, 4.43, 8.98, 4.75, 3.72, 7.60, 2.32, 2.57, 1.50, 1.57, 1.98, 0.60, 0.72, 0.95,
+    1.43, 0.62, 0.77, 0.67, 0.70, 8.58, 3.93, 4.80, 32.77, 37.90, 6.02, 1.55, 0.97, 1.12, 1.23, 5.00, 2.37, 2.68, 1.07,
+    2.50, 0.93, 3.90, 2.02, 6.33, 3.88, 4.90, 0.83, 3.75, 0.90, 3.20, 10.33, 11.90, 2.45, 1.30, 2.32, 1.05, 4.37, 1.17,
+    1.18, 1.77, 1.45, 3.67, 2.33, 3.58, 5.15, 1.07, 8.05, 0.58, 6.33, 3.40, 2.18, 2.72, 4.32, 5.65, 1.25, 4.17, 1.42,
+    1.17, 1.13, 0.82, 1.07, 3.48, 0.95, 0.95, 0.90, 0.45, 0.50, 0.75, 9.62, 3.65, 27.48, 39.95
+)
+#
+# # Add average and deviation
+#
+# # %%
+# ascii_histogram(stage2)
+# print("---")
+# ascii_histogram(stage3)
+# # %%
+# utils.histogram(data=stage2, x_label='Time (mins)', y_label='Frequency',
+#                 title='Labeling for Stage2 - Time per image', bins='auto', counter=0)
+# plt.show()
+# # %%
+# utils.histogram(data=stage3, x_label='Time (mins)', y_label='Frequency',
+#                 title='Labeling for Stage3 - Time per image', bins='auto', counter=0)
 
-# %%
-ascii_histogram(stage2)
-print("---")
-ascii_histogram(stage3)
-# %%
-n, bins, patches = plt.hist(x=stage2, bins='auto', color='#0504aa',
-                            alpha=0.7, rwidth=0.85)
-plt.grid(axis='y', alpha=0.75)
-plt.xlabel('Time (mins)')
-plt.ylabel('Frequency')
-plt.title('Labeling for Stage2 - Time per image')
-maxfreq = n.max()
-
-# Set a clean upper y-axis limit.
-plt.ylim(ymax=np.ceil(maxfreq / 10) * 10 if maxfreq % 10 else maxfreq + 10)
-
-plt.show()
-# %%
-n, bins, patches = plt.hist(x=stage3, bins='auto', color='#0504aa',
-                            alpha=0.7, rwidth=0.85)
-plt.grid(axis='y', alpha=0.75)
-plt.xlabel('Time (mins)')
-plt.ylabel('Frequency')
-plt.title('Labeling for Stage3 - Time per image')
-maxfreq = n.max()
-
-# Set a clean upper y-axis limit.
-plt.ylim(ymax=np.ceil(maxfreq / 10) * 10 if maxfreq % 10 else maxfreq + 10)
-plt.show()
-
-# %%
-n, bins, patches = plt.hist(x=stage2b, bins='auto', color='#0504aa',
-                            alpha=0.7, rwidth=0.85)
-plt.grid(axis='y', alpha=0.75)
-plt.xlabel('Time (mins)')
-plt.ylabel('Frequency')
-plt.title('Labeling for Stage2 - Time per image - Reproduced results')
-maxfreq = n.max()
-
-# Set a clean upper y-axis limit.
-plt.ylim(ymax=np.ceil(maxfreq / 10) * 10 if maxfreq % 10 else maxfreq + 10)
-
-plt.show()
-
-# %%
-n, bins, patches = plt.hist(x=stage3b, bins='auto', color='#0504aa',
-                            alpha=0.7, rwidth=0.85)
-plt.grid(axis='y', alpha=0.75)
-plt.xlabel('Time (mins)')
-plt.ylabel('Frequency')
-plt.title('Labeling for Stage3 - Time per image - Reproduced results')
-maxfreq = n.max()
-
-# Set a clean upper y-axis limit.
-plt.ylim(ymax=np.ceil(maxfreq / 10) * 10 if maxfreq % 10 else maxfreq + 10)
-plt.show()
 
 # %%
 stage2_labels = (
@@ -110,29 +77,38 @@ stage3_labels = (
     0.11, 0.16, 0.09, 0.07, 0.06, 0.11, 0.13, 0.11, 0.06, 0.09, 0.04, 0.04,
 )
 
-# %%
-n, bins, patches = plt.hist(x=stage2_labels, bins='auto', color='#0504aa',
-                            alpha=0.7, rwidth=0.85)
-plt.grid(axis='y', alpha=0.75)
-plt.xlabel('Time (mins)')
-plt.ylabel('Frequency')
-plt.title('Labeling for Stage2 - Time per label')
-maxfreq = n.max()
-
-# Set a clean upper y-axis limit.
-plt.ylim(ymax=np.ceil(maxfreq / 10) * 10 if maxfreq % 10 else maxfreq + 10)
-
-plt.show()
+campaign4_labels = (
+        3.03, 1.79, 0.78, 0.82, 0.00, 0.92, 0.69, 1.07, 2.26, 0.61, 0.62, 0.00, 1.10, 0.86, 1.17, 0.48, 1.09, 0.53,
+        0.94, 0.63, 0.63, 0.86, 0.68, 0.63, 0.49, 0.44, 0.33, 0.28, 0.36, 0.99, 0.49, 0.53, 0.65, 0.49, 0.73, 0.48,
+        0.40, 0.90, 0.80, 0.52, 0.67, 0.94, 0.89, 0.69, 0.62, 0.84, 0.29, 0.51, 0.75, 0.52, 0.99, 0.30, 0.36, 0.48,
+        0.48, 0.31, 0.38, 0.33, 0.35, 0.50, 1.31, 0.34, 0.43, 0.52, 0.32, 0.56, 0.62, 0.56, 0.79, 0.30, 0.53, 0.36,
+        0.47, 0.33, 0.50, 0.63, 0.65, 0.49, 0.42, 0.34, 0.45, 0.53, 5.17, 0.63, 0.61, 0.65, 0.39, 0.53, 0.73, 0.39,
+        0.39, 0.29, 0.29, 0.28, 0.47, 0.36, 0.86, 0.53, 0.50, 0.29, 0.45, 0.49, 0.44, 0.25, 0.31, 0.40, 0.63, 0.26,
+        0.71, 0.58, 0.57, 0.41, 0.53, 1.16, 0.32, 0.14, 0.15, 0.23, 0.10, 0.15, 1.20, 0.52
+)
 
 # %%
-n, bins, patches = plt.hist(x=stage3_labels, bins='auto', color='#0504aa',
-                            alpha=0.7, rwidth=0.85)
-plt.grid(axis='y', alpha=0.75)
-plt.xlabel('Time (mins)')
-plt.ylabel('Frequency')
-plt.title('Labeling for Stage3 - Time per label')
-maxfreq = n.max()
+# Campaign 0 (Stage 1) Stamps
+# Campaign 1 (Stage 2) Pages and stamps <<<
+# Campaign 2 (Stage 3) Only pages
+# Campaign 4 (Stage 5) Pages and stamps <<<
 
-# Set a clean upper y-axis limit.
-plt.ylim(ymax=np.ceil(maxfreq / 10) * 10 if maxfreq % 10 else maxfreq + 10)
-plt.show()
+utils.histogram(data=stage2b, x_label='Time (mins)', y_label='Frequency',
+                title='Labeling for Stage2 - Time per image - Reproduced results', bins='auto', counter=0)
+
+utils.histogram(data=stage3b, x_label='Time (mins)', y_label='Frequency',
+                title='Labeling for Stage3 - Time per image - Reproduced results', bins='auto', counter=0)
+
+utils.histogram(data=stage4b, x_label='Time (mins)', y_label='Frequency',
+                title='Labeling for Campaign4 - Time per image', bins='auto', counter=0)
+
+# %%
+
+utils.histogram(data=stage2_labels, x_label='Time (mins)', y_label='Frequency',
+                title='Labeling for Stage2 - Time per label', bins='auto', counter=0)
+
+utils.histogram(data=stage3_labels, x_label='Time (mins)', y_label='Frequency',
+                title='Labeling for Stage3 - Time per label', bins='auto', counter=0)
+
+utils.histogram(data=campaign4_labels, x_label='Time (mins)', y_label='Frequency',
+                title='Labeling for Campaign4 - Time per label', bins='auto', counter=0)
